@@ -1,0 +1,27 @@
+---
+- name: Create /edatools directory
+  file:
+    path: /edatools
+    state: directory
+    owner: gleidson
+    group: gleidson
+    mode: 0755
+  become: yes
+
+- name: Download skywater to /edatools folder
+  git:
+    repo: git@github.com:google/skywater-pdk.git
+    dest: /edatools/skywater-pdk
+    clone: yes
+    update: yes
+    force: yes
+    recursive: no
+  
+- name: update skywater-pdk
+  command: "{{ item }}"
+  args:
+    chdir: /edatools/skywater-pdk
+  with_items:
+    - git submodule init
+    - git submodule update libraries/sky130_fd_pr/latest
+

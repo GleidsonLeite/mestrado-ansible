@@ -1,0 +1,11 @@
+---
+
+- name: "Install ngspice and libngspice"
+  apt:
+    name: "{{ item }}"
+    state: latest
+  become: yes
+  with_items:
+    - ngspice
+    - libngspice0-dev
+    - libngspice0

@@ -1,0 +1,6 @@
+---
+- hosts: mestrado
+  roles:
+    - skywater
+    - ngspice
+    - python
